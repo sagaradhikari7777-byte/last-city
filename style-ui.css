@@ -46,20 +46,19 @@
   .wide-btn{min-width:48px}
   .objective-panel{max-width:calc(100% - 84px)}
 }
+
+/* Upgrade pass 2 */
 .submeta-row{grid-template-columns:repeat(4,1fr)}
 .hero-chip{border-color:rgba(112,240,176,.16)}
 .boss-banner{position:absolute;left:50%;top:48px;transform:translateX(-50%);width:min(72%,320px);z-index:4;padding:8px 10px;border-radius:14px;background:rgba(45,10,18,.8);border:1px solid rgba(255,77,103,.35);box-shadow:0 10px 30px rgba(0,0,0,.32);backdrop-filter:blur(14px)}
 .boss-banner.hidden{display:none}
 .boss-banner>span{display:block;text-align:center;font-size:10px;font-weight:900;letter-spacing:.14em;color:#ffd9df;margin-bottom:6px}
-.boss-bar{height:5px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}
-.boss-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff4d67,#ff9f72);transition:width .15s}
-.section-label{margin-top:18px;margin-bottom:7px;font-size:9px;font-weight:900;letter-spacing:.16em;color:#85aa9f}
-.section-label.split{display:flex;justify-content:space-between;align-items:center}
-.section-label b{color:#e9f8f3;font-size:11px}
-.achievement-list{display:grid;gap:8px;margin-top:8px}
-.achievement-row{display:flex;gap:9px;align-items:flex-start;padding:10px 11px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055)}
-.achievement-row .badge{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:rgba(255,205,107,.12);color:#ffcd6b;flex:none}
-.achievement-row b{display:block;font-size:11px}
-.achievement-row small{display:block;color:#91a69f;font-size:9px;line-height:1.35;margin-top:3px}
-.achievement-row.locked{opacity:.45}
+.boss-bar{height:5px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden}.boss-bar i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff4d67,#ff9f72);transition:width .15s}
+.section-label{margin-top:18px;margin-bottom:7px;font-size:9px;font-weight:900;letter-spacing:.16em;color:#85aa9f}.section-label.split{display:flex;justify-content:space-between;align-items:center}.section-label b{color:#e9f8f3;font-size:11px}
+.achievement-list{display:grid;gap:8px;margin-top:8px}.achievement-row{display:flex;gap:9px;align-items:flex-start;padding:10px 11px;border-radius:14px;background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.055)}.achievement-row .badge{width:26px;height:26px;border-radius:9px;display:grid;place-items:center;background:rgba(255,205,107,.12);color:#ffcd6b;flex:none}.achievement-row b{display:block;font-size:11px}.achievement-row small{display:block;color:#91a69f;font-size:9px;line-height:1.35;margin-top:3px}.achievement-row.locked{opacity:.45}
 @media(max-width:430px){.submeta-row{grid-template-columns:repeat(2,1fr)}.top-right{display:none}.boss-banner{top:47px;width:64%}}
+
+.build-card{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.025));box-shadow:inset 0 1px 0 rgba(255,255,255,.05),0 8px 20px rgba(0,0,0,.12)}
+.build-card .emoji{filter:drop-shadow(0 0 8px rgba(255,255,255,.08))}
+.world-wrap{background:radial-gradient(circle at 30% 0%,rgba(255,255,255,.05),transparent 35%),linear-gradient(#15201d,#0b1211)}
+.hud,.build-panel,.modal-card{box-shadow:0 20px 60px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.04)}
