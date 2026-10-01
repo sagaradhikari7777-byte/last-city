@@ -3,14 +3,15 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
-  <meta name="theme-color" content="#08100f" />
+  <meta name="theme-color" content="#08110f" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Last City" />
   <link rel="manifest" href="/manifest.webmanifest" />
-  <link rel="apple-touch-icon" href="/icon-192.svg" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
   <title>LAST CITY — Roguelite Survival</title>
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="/style-core.css" />
+  <link rel="stylesheet" href="/style-ui.css" />
 </head>
 <body>
   <main id="app">
@@ -18,32 +19,58 @@
       <div class="brand-row">
         <div>
           <div class="eyebrow">LAST CITY</div>
-          <div class="phase-line"><span id="phaseDot"></span><strong id="phaseLabel">DAY 1</strong><span id="phaseTimer">00:45</span></div>
+          <div class="phase-line">
+            <span id="phaseDot"></span>
+            <strong id="phaseLabel">DAY 1</strong>
+            <span id="phaseTimer">00:45</span>
+          </div>
         </div>
         <div class="header-actions">
           <button id="pauseBtn" class="icon-btn" aria-label="Pause">Ⅱ</button>
           <button id="speedBtn" class="icon-btn" aria-label="Game speed">1×</button>
+          <button id="techBtn" class="icon-btn wide-btn" aria-label="Tech lab">Tech</button>
+          <button id="audioBtn" class="icon-btn" aria-label="Sound">🔊</button>
+          <button id="helpBtn" class="icon-btn" aria-label="Help">?</button>
         </div>
       </div>
+
       <div class="stats">
         <div class="stat"><span>🍖</span><div><b id="food">0</b><small>food</small></div></div>
         <div class="stat"><span>⚡</span><div><b id="power">0</b><small>power</small></div></div>
         <div class="stat"><span>🔩</span><div><b id="scrap">0</b><small>scrap</small></div></div>
         <div class="stat"><span>👥</span><div><b id="population">0</b><small>people</small></div></div>
       </div>
+
       <div class="morale-row">
         <span>Morale</span>
         <div class="bar"><i id="moraleBar"></i></div>
         <b id="morale">0%</b>
       </div>
+
+      <div class="submeta-row">
+        <div class="submeta-pill">🔬 Tech <b id="techPoints">0</b></div>
+        <div class="submeta-pill">🛠 Free crew <b id="freeCrew">0</b></div>
+        <div class="submeta-pill">🌘 Threat <b id="forecastLabel">Low</b></div>
+        <div class="submeta-pill">◆ Legacy <b id="legacyShards">0</b></div>
+      </div>
     </header>
 
     <section class="world-wrap">
       <canvas id="gameCanvas" aria-label="Last City game map"></canvas>
+
       <div class="world-overlay top-left">
-        <div class="chip">🏛 HQ <span id="hqHealth">100%</span></div>
-        <div class="chip">☠ <span id="enemyCount">0</span></div>
+        <div class="chip">HQ <span id="hqHealth">100%</span></div>
+        <div class="chip">Enemies <span id="enemyCount">0</span></div>
+        <div class="chip hero-chip">Rook <span id="heroHealth">100%</span></div>
       </div>
+
+      <div class="world-overlay top-right">
+        <div class="chip alt">Day score <span id="score">0</span></div>
+        <div class="chip alt">Kills <span id="kills">0</span></div>
+      </div>
+
+      <div id="bossBanner" class="boss-banner hidden"><span id="bossName">BOSS</span><div class="boss-bar"><i id="bossBar"></i></div></div>
+      <div id="objectivePanel" class="objective-panel glass"></div>
       <div id="toast" class="toast"></div>
       <button id="inspectMode" class="inspect-fab">◎ Inspect</button>
     </section>
@@ -88,6 +115,39 @@
     </div>
   </div>
 
+  <div id="techModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card glass strong center-card tech-card">
+      <div class="inspect-title">
+        <div><span class="eyebrow">RESEARCH</span><h2>Tech Lab</h2></div>
+        <button id="closeTech" class="icon-btn">×</button>
+      </div>
+      <p class="muted">Research this run, spend Legacy shards on permanent upgrades, and track achievements.</p>
+      <div class="section-label">RUN RESEARCH</div>
+      <div id="techList" class="tech-list"></div>
+      <div class="section-label split"><span>LEGACY UPGRADES</span><span>◆ <b id="legacyCount">0</b></span></div>
+      <div id="legacyList" class="tech-list"></div>
+      <div class="section-label">ACHIEVEMENTS</div>
+      <div id="achievementList" class="achievement-list"></div>
+    </div>
+  </div>
+
+  <div id="tutorialModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card glass strong center-card">
+      <div class="event-icon">🏙️</div>
+      <div class="eyebrow">WELCOME COMMANDER</div>
+      <h1>Hold the Last City</h1>
+      <ul class="tutorial-list">
+        <li>Build farms, power and scrap production during the day.</li>
+        <li>Place towers and barriers before nightfall.</li>
+        <li>Tap buildings in Inspect mode to upgrade them.</li>
+        <li>Earn tech points from dawn and missions, then buy upgrades.</li>
+        <li>Rook, your hero, fights automatically at night and levels up.</li>
+        <li>Long runs earn Legacy shards for permanent upgrades across runs.</li>
+      </ul>
+      <button id="startRunBtn" class="primary-btn">Start run</button>
+    </div>
+  </div>
+
   <div id="gameOverModal" class="modal hidden" role="dialog" aria-modal="true">
     <div class="modal-card glass strong center-card">
       <div class="event-icon">☠️</div>
@@ -98,6 +158,14 @@
     </div>
   </div>
 
-  <script src="/game.js" defer></script>
+  <script src="/game-data.js" defer></script>
+  <script src="/game-meta.js" defer></script>
+  <script src="/game-state.js" defer></script>
+  <script src="/game-ui.js" defer></script>
+  <script src="/game-wave.js" defer></script>
+  <script src="/game-combat.js" defer></script>
+  <script src="/game-render-world.js" defer></script>
+  <script src="/game-render-units.js" defer></script>
+  <script src="/game-main.js" defer></script>
 </body>
 </html>
