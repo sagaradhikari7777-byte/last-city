@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#08100f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Last City" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="/icon-192.svg" />
+  <title>LAST CITY — Roguelite Survival</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <main id="app">
+    <header class="hud glass">
+      <div class="brand-row">
+        <div>
+          <div class="eyebrow">LAST CITY</div>
+          <div class="phase-line"><span id="phaseDot"></span><strong id="phaseLabel">DAY 1</strong><span id="phaseTimer">00:45</span></div>
+        </div>
+        <div class="header-actions">
+          <button id="pauseBtn" class="icon-btn" aria-label="Pause">Ⅱ</button>
+          <button id="speedBtn" class="icon-btn" aria-label="Game speed">1×</button>
+        </div>
+      </div>
+      <div class="stats">
+        <div class="stat"><span>🍖</span><div><b id="food">0</b><small>food</small></div></div>
+        <div class="stat"><span>⚡</span><div><b id="power">0</b><small>power</small></div></div>
+        <div class="stat"><span>🔩</span><div><b id="scrap">0</b><small>scrap</small></div></div>
+        <div class="stat"><span>👥</span><div><b id="population">0</b><small>people</small></div></div>
+      </div>
+      <div class="morale-row">
+        <span>Morale</span>
+        <div class="bar"><i id="moraleBar"></i></div>
+        <b id="morale">0%</b>
+      </div>
+    </header>
+
+    <section class="world-wrap">
+      <canvas id="gameCanvas" aria-label="Last City game map"></canvas>
+      <div class="world-overlay top-left">
+        <div class="chip">🏛 HQ <span id="hqHealth">100%</span></div>
+        <div class="chip">☠ <span id="enemyCount">0</span></div>
+      </div>
+      <div id="toast" class="toast"></div>
+      <button id="inspectMode" class="inspect-fab">◎ Inspect</button>
+    </section>
+
+    <section class="build-panel glass">
+      <div class="panel-head">
+        <div>
+          <span class="eyebrow">BUILD</span>
+          <strong id="selectionLabel">Choose a structure</strong>
+        </div>
+        <button id="clearSelection" class="small-btn">Cancel</button>
+      </div>
+      <div id="buildRail" class="build-rail"></div>
+    </section>
+  </main>
+
+  <div id="eventModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card glass strong">
+      <div class="event-icon" id="eventIcon">⚠️</div>
+      <div class="eyebrow">CITY EVENT</div>
+      <h2 id="eventTitle">Event</h2>
+      <p id="eventText"></p>
+      <div id="eventChoices" class="choice-stack"></div>
+    </div>
+  </div>
+
+  <div id="inspectModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card glass strong bottom-sheet">
+      <div class="sheet-grabber"></div>
+      <div class="inspect-title">
+        <div><span class="eyebrow">STRUCTURE</span><h2 id="inspectName">Building</h2></div>
+        <button id="closeInspect" class="icon-btn">×</button>
+      </div>
+      <div class="inspect-grid">
+        <div><small>LEVEL</small><b id="inspectLevel">1</b></div>
+        <div><small>HEALTH</small><b id="inspectHealth">100%</b></div>
+        <div><small>OUTPUT</small><b id="inspectOutput">—</b></div>
+      </div>
+      <p id="inspectDescription" class="muted"></p>
+      <button id="upgradeBtn" class="primary-btn">Upgrade</button>
+      <button id="demolishBtn" class="danger-btn">Demolish + recover 40%</button>
+    </div>
+  </div>
+
+  <div id="gameOverModal" class="modal hidden" role="dialog" aria-modal="true">
+    <div class="modal-card glass strong center-card">
+      <div class="event-icon">☠️</div>
+      <div class="eyebrow">THE CITY HAS FALLEN</div>
+      <h1 id="gameOverTitle">Day 1</h1>
+      <p id="gameOverStats"></p>
+      <button id="restartBtn" class="primary-btn">Rebuild the city</button>
+    </div>
+  </div>
+
+  <script src="/game.js" defer></script>
+</body>
+</html>
